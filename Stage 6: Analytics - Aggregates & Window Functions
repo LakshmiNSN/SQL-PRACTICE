@@ -1,0 +1,51 @@
+---2.window functions structure function() over()
+--row_number() gives unique ranking 
+--ranks product by price
+select 
+product_name,
+price,
+row_number() over(order by price desc)as rank
+from products;
+
+---rank() same values get  same rank but skip number 
+--rank students by score
+select 
+students,
+score,
+rank() over(order by price desc)as rank
+from students;
+
+--dense_rank() same values but no gaps 
+--compact ranking 
+select 
+students,
+score
+dense_rank() over(order by score desc)
+from students;
+
+--nitle divides rows into equal groups
+--divide students into 4 quartiles
+select name ,score 
+nitle(4) over(order by score desc)as quartiles
+from students;
+
+--3.running totals :calculate cumulative sales by date 
+select 
+sal_date,
+amount,
+sum(amount) over(order by sal_date desc)as running_total
+from sales;
+--4.lag() gives previous row value
+--lead()gives next row value
+--compare current month sales with previous month 
+select 
+month,
+sales,
+lag(sales)over(order by month desc)as previous_month
+from sales;
+
+select
+month,
+sales,
+lead(sales) over(order by month desc)as next_month
+from sales;
