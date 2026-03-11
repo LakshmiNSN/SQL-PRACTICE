@@ -1,0 +1,54 @@
+
+
+--ALTER TABLE	 
+--ADD COLUMNS
+ALTER TABLE USERS ADD COLUMN PHONE TEXT ;
+--RENAME COLUMNS
+ALTER TABLE USERS RENAME COLUMN NAME TO USER_NAME;
+--CHANGE DATA TYPES 
+ALTER TABLE USERS ALTER COLUMN PHONE TYPE VARCHAR(15);
+--DROP COLOUMN 
+ALTER TABLE USERS DROP COLUMN PHONE;
+
+--2.INDEX CREATION 
+--B-TREE INDEX
+CREATE INDEX idx_users_email ON users(email);
+--INDEX ON POST_ID 
+CREATE INDEX idx_comments_post_id ON comments(post_id);
+--MULTI COLUMN INDEX
+CREATE INDEX idx_posts_user_created ON posts(user_id,created_at);
+--PARTIAL INDEX
+CREATE INDEX idx_active_posts 
+ON posts(post_id) 
+WHERE comment_count > 0;
+
+--3.COMPARE QUERY PERFORMANCE
+EXPLAIN ANALYZE
+SELECT * FROM posts WHERE user_id = 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
